@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
@@ -15,6 +18,8 @@ const app_service_1 = require("./app.service");
 const aaa_guard_1 = require("./aaa.guard");
 const aaa_decorator_1 = require("./aaa.decorator");
 const bbb_decorator_1 = require("./bbb.decorator");
+const ccc_decorator_1 = require("./ccc.decorator");
+const ddd_decorator_1 = require("./ddd.decorator");
 let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
@@ -27,6 +32,14 @@ let AppController = class AppController {
     }
     getHello3() {
         return this.appService.getHello();
+    }
+    getHello4(c) {
+        return c;
+    }
+    getHello6(aaa, bbb, ccc) {
+        console.log('aaa', aaa);
+        console.log('bbb', bbb);
+        console.log('ccc', ccc);
     }
 };
 exports.AppController = AppController;
@@ -52,6 +65,22 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", String)
 ], AppController.prototype, "getHello3", null);
+__decorate([
+    (0, common_1.Get)('hello4'),
+    __param(0, (0, ccc_decorator_1.Ccc)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", String)
+], AppController.prototype, "getHello4", null);
+__decorate([
+    (0, common_1.Get)('hello6'),
+    __param(0, (0, common_1.Query)('aaa')),
+    __param(1, (0, ddd_decorator_1.MyQuery)('bbb')),
+    __param(2, (0, ddd_decorator_1.MyHeaders)('host')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "getHello6", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])
