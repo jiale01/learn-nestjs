@@ -12,6 +12,8 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const aaa_module_1 = require("./aaa/aaa.module");
 const bbb_module_1 = require("./bbb/bbb.module");
+const ccc_service_1 = require("./ccc.service");
+const ddd_service_1 = require("./ddd.service");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -19,7 +21,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [aaa_module_1.AaaModule, bbb_module_1.BbbModule],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, ccc_service_1.CccService, ddd_service_1.DddService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

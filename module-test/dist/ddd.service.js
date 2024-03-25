@@ -8,24 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppService = void 0;
+exports.DddService = void 0;
 const common_1 = require("@nestjs/common");
 const ccc_service_1 = require("./ccc.service");
-const ddd_service_1 = require("./ddd.service");
-let AppService = class AppService {
-    constructor(cccService, dddService) {
+let DddService = class DddService {
+    constructor(cccService) {
         this.cccService = cccService;
-        this.dddService = dddService;
     }
-    getHello() {
-        return this.dddService.ddd() + this.cccService.eee();
+    ddd() {
+        return this.cccService.ccc() + 'ddd';
     }
 };
-exports.AppService = AppService;
-exports.AppService = AppService = __decorate([
+exports.DddService = DddService;
+exports.DddService = DddService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [ccc_service_1.CccService,
-        ddd_service_1.DddService])
-], AppService);
-//# sourceMappingURL=app.service.js.map
+    __param(0, (0, common_1.Inject)((0, common_1.forwardRef)(() => ccc_service_1.CccService))),
+    __metadata("design:paramtypes", [ccc_service_1.CccService])
+], DddService);
+//# sourceMappingURL=ddd.service.js.map
