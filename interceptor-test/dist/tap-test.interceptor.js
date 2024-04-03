@@ -8,26 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var TapTestInterceptor_1;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AaaInterceptor = void 0;
+exports.TapTestInterceptor = void 0;
+const app_service_1 = require("./app.service");
 const common_1 = require("@nestjs/common");
 const rxjs_1 = require("rxjs");
-const app_service_1 = require("./app.service");
-let AaaInterceptor = class AaaInterceptor {
+let TapTestInterceptor = TapTestInterceptor_1 = class TapTestInterceptor {
     constructor(appService) {
         this.appService = appService;
+        this.logger = new common_1.Logger(TapTestInterceptor_1.name);
     }
     intercept(context, next) {
-        this.appService.getHello();
-        const now = Date.now();
-        return next
-            .handle()
-            .pipe((0, rxjs_1.tap)(() => console.log(`After... ${Date.now() - now}ms`)));
+        return next.handle().pipe((0, rxjs_1.tap)((data) => {
+            this.appService.getHello();
+            this.logger.log(`log something`, data);
+        }));
     }
 };
-exports.AaaInterceptor = AaaInterceptor;
-exports.AaaInterceptor = AaaInterceptor = __decorate([
+exports.TapTestInterceptor = TapTestInterceptor;
+exports.TapTestInterceptor = TapTestInterceptor = TapTestInterceptor_1 = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [app_service_1.AppService])
-], AaaInterceptor);
-//# sourceMappingURL=aaa.interceptor.js.map
+], TapTestInterceptor);
+//# sourceMappingURL=tap-test.interceptor.js.map

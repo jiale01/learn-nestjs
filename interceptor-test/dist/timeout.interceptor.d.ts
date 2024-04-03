@@ -1,8 +1,5 @@
 import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { AppService } from './app.service';
-export declare class AaaInterceptor implements NestInterceptor {
-    private readonly appService;
-    constructor(appService: AppService);
+export declare class TimeoutInterceptor implements NestInterceptor {
     intercept(context: ExecutionContext, next: CallHandler): Observable<any>;
 }

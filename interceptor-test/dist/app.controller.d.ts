@@ -4,4 +4,7 @@ export declare class AppController {
     constructor(appService: AppService);
     getHello(): string;
     aaa(): string;
+    bbb(): string;
+    ccc(): string;
+    ddd(): Promise<string>;
 }
