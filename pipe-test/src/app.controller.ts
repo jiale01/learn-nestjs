@@ -12,10 +12,12 @@ import {
   ParseEnumPipe,
   ParseUUIDPipe,
   DefaultValuePipe,
+  ValidationPipe,
+  Body,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AaaPipe } from './aaa.pipe';
-
+import { Ooo } from './app.dto';
 enum Ggg {
   AAA = '111',
   BBB = '222',
@@ -105,5 +107,10 @@ export class AppController {
     @Param('bbb', AaaPipe) bbb: number,
   ) {
     return aaa + bbb;
+  }
+
+  @Get('ooo')
+  getHello11(@Body(new ValidationPipe()) obj: Ooo) {
+    console.log(obj);
   }
 }
