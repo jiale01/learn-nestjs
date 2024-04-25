@@ -18,6 +18,6 @@ export declare class AppController {
     getHello8(uuid: string): string;
     getHello9(kkk: string): string;
     getHello10(aaa: string, bbb: number): string;
-    getHello11(obj: Ooo): void;
+    getHello11(obj: Ooo): Ooo;
 }
 export {};

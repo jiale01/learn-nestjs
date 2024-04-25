@@ -17,6 +17,7 @@ import {
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AaaPipe } from './aaa.pipe';
+import { MyValidationPipe } from './validation/validation.pipe';
 import { Ooo } from './app.dto';
 enum Ggg {
   AAA = '111',
@@ -110,7 +111,8 @@ export class AppController {
   }
 
   @Get('ooo')
-  getHello11(@Body(new ValidationPipe()) obj: Ooo) {
+  getHello11(@Body(new MyValidationPipe()) obj: Ooo) {
     console.log(obj);
+    return obj;
   }
 }
