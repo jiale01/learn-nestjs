@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Post,
   Query,
   ParseIntPipe,
   HttpException,
@@ -18,7 +19,7 @@ import {
 import { AppService } from './app.service';
 import { AaaPipe } from './aaa.pipe';
 import { MyValidationPipe } from './validation/validation.pipe';
-import { Ooo } from './app.dto';
+import { Ooo, Ppp } from './app.dto';
 enum Ggg {
   AAA = '111',
   BBB = '222',
@@ -111,8 +112,13 @@ export class AppController {
   }
 
   @Get('ooo')
-  getHello11(@Body(new MyValidationPipe()) obj: Ooo) {
+  getHello11(@Body() obj: Ooo) {
     console.log(obj);
     return obj;
+  }
+
+  @Post('ppp')
+  ppp(@Body() obj: Ppp) {
+    console.log(obj);
   }
 }

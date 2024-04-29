@@ -4,3 +4,10 @@ export declare class Ooo {
     sex: boolean;
     hobbies: string[];
 }
+export declare class Ppp {
+    title: string;
+    text: string;
+    rating: number;
+    email: string;
+    site: string;
+}

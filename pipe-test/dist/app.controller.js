@@ -16,7 +16,6 @@ exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const aaa_pipe_1 = require("./aaa.pipe");
-const validation_pipe_1 = require("./validation/validation.pipe");
 const app_dto_1 = require("./app.dto");
 var Ggg;
 (function (Ggg) {
@@ -61,6 +60,9 @@ let AppController = class AppController {
     getHello11(obj) {
         console.log(obj);
         return obj;
+    }
+    ppp(obj) {
+        console.log(obj);
     }
 };
 exports.AppController = AppController;
@@ -146,11 +148,18 @@ __decorate([
 ], AppController.prototype, "getHello10", null);
 __decorate([
     (0, common_1.Get)('ooo'),
-    __param(0, (0, common_1.Body)(new validation_pipe_1.MyValidationPipe())),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [app_dto_1.Ooo]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getHello11", null);
+__decorate([
+    (0, common_1.Post)('ppp'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [app_dto_1.Ppp]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "ppp", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])

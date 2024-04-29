@@ -1,5 +1,5 @@
 import { AppService } from './app.service';
-import { Ooo } from './app.dto';
+import { Ooo, Ppp } from './app.dto';
 declare enum Ggg {
     AAA = "111",
     BBB = "222",
@@ -19,5 +19,6 @@ export declare class AppController {
     getHello9(kkk: string): string;
     getHello10(aaa: string, bbb: number): string;
     getHello11(obj: Ooo): Ooo;
+    ppp(obj: Ppp): void;
 }
 export {};
