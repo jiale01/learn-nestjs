@@ -6,6 +6,9 @@ import {
   UploadedFile,
   UploadedFiles,
   UseInterceptors,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import {
@@ -14,7 +17,8 @@ import {
   FileFieldsInterceptor,
   AnyFilesInterceptor,
 } from '@nestjs/platform-express';
-
+import { storage } from './my-file-storage';
+import { FileSizeValidationPipe } from './file-size-validation-pipe.pipe';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
@@ -73,7 +77,7 @@ export class AppController {
   @Post('ddd')
   @UseInterceptors(
     AnyFilesInterceptor({
-      dest: 'uploads',
+      storage
     }),
   )
   uploadAnyFiles(
@@ -83,4 +87,32 @@ export class AppController {
     console.log('body', body);
     console.log('files', files);
   }
+
+  @Post('eee')
+  @UseInterceptors(FileInterceptor('aaa', {
+    dest: 'uploads'
+  }))
+  uploadFile2(
+    @UploadedFile(FileSizeValidationPipe) file: Express.Multer.File,
+    @Body() body,
+  ) {
+    console.log('body', body);
+    console.log('file', file);
+  }
+
+  // 文件大小类型限制
+  @Post('fff')
+  @UseInterceptors(FileInterceptor('aaa', {
+      dest: 'uploads'
+  }))
+  uploadFile3(@UploadedFile(new ParseFilePipe({
+      validators: [
+        new MaxFileSizeValidator({ maxSize: 1000 }),
+        new FileTypeValidator({ fileType: 'image/jpeg' }),
+      ],
+  })) file: Express.Multer.File, @Body() body) {
+      console.log('body', body);
+      console.log('file', file);
+  }
+
 }

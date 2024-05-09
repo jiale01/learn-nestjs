@@ -16,6 +16,8 @@ exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const platform_express_1 = require("@nestjs/platform-express");
+const my_file_storage_1 = require("./my-file-storage");
+const file_size_validation_pipe_pipe_1 = require("./file-size-validation-pipe.pipe");
 let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
@@ -38,6 +40,14 @@ let AppController = class AppController {
     uploadAnyFiles(files, body) {
         console.log('body', body);
         console.log('files', files);
+    }
+    uploadFile2(file, body) {
+        console.log('body', body);
+        console.log('file', file);
+    }
+    uploadFile3(file, body) {
+        console.log('body', body);
+        console.log('file', file);
     }
 };
 exports.AppController = AppController;
@@ -86,7 +96,7 @@ __decorate([
 __decorate([
     (0, common_1.Post)('ddd'),
     (0, common_1.UseInterceptors)((0, platform_express_1.AnyFilesInterceptor)({
-        dest: 'uploads',
+        storage: my_file_storage_1.storage
     })),
     __param(0, (0, common_1.UploadedFiles)()),
     __param(1, (0, common_1.Body)()),
@@ -94,6 +104,33 @@ __decorate([
     __metadata("design:paramtypes", [Array, Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "uploadAnyFiles", null);
+__decorate([
+    (0, common_1.Post)('eee'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('aaa', {
+        dest: 'uploads'
+    })),
+    __param(0, (0, common_1.UploadedFile)(file_size_validation_pipe_pipe_1.FileSizeValidationPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "uploadFile2", null);
+__decorate([
+    (0, common_1.Post)('fff'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('aaa', {
+        dest: 'uploads'
+    })),
+    __param(0, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
+        validators: [
+            new common_1.MaxFileSizeValidator({ maxSize: 1000 }),
+            new common_1.FileTypeValidator({ fileType: 'image/jpeg' }),
+        ],
+    }))),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "uploadFile3", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])

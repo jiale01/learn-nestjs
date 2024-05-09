@@ -11,4 +11,6 @@ export declare class AppController {
         bbb?: Express.Multer.File[];
     }, body: any): void;
     uploadAnyFiles(files: Array<Express.Multer.File>, body: any): void;
+    uploadFile2(file: Express.Multer.File, body: any): void;
+    uploadFile3(file: Express.Multer.File, body: any): void;
 }
